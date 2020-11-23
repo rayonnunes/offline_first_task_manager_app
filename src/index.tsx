@@ -1,12 +1,12 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import Routes from './routes'
 import store from './store'
-import Home from './views/Home'
 
 const App = () => {
   return (
     <Provider store={store}>
-      <Home />
+      <Routes />
     </Provider>
   )
 }

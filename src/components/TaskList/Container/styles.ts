@@ -1,11 +1,9 @@
 import styled from 'styled-components/native'
 import { ColorProps } from '../../../assets/colors/types'
 
-export const ContainerRow = styled.View`
-  flex-direction: row;
-  align-items: center;
+export const Card = styled.View`
   padding: 16px 9px;
-  margin: 8px 6px;
+  margin: 6px;
   background-color: ${({ theme }: { theme: ColorProps }) =>
     theme.backgroundContainer};
   border-radius: 4px;

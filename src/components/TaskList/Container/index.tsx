@@ -1,8 +1,8 @@
 import React from 'react'
-import { ContainerRow } from './styles'
+import { Card } from './styles'
 
 const Container = ({ children }: { children: React.ReactNode }) => (
-  <ContainerRow>{children}</ContainerRow>
+  <Card>{children}</Card>
 )
 
 export default Container

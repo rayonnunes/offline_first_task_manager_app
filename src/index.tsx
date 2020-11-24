@@ -9,22 +9,19 @@ import store from './store'
 import themeColors from './assets/colors'
 import storeKeys from './config/storageKeys'
 
-enum StorageThemeProps {
-  dark = 'dark',
-  light = 'light',
-}
-
 const App = () => {
   const deviceTheme = useColorScheme() || 'light' // light, dark, null
-  const [storageTheme, setStorageTheme] = useState<StorageThemeProps | null>(
+  const [storageTheme, setStorageTheme] = useState<'light' | 'dark' | null>(
     null,
   )
-  const theme = themeColors[storageTheme || deviceTheme]
+  const theme = themeColors.dark || themeColors[storageTheme || deviceTheme]
 
   const getStorageTheme = useCallback(async () => {
     const value = await AsyncStorage.getItem(storeKeys.themeColors)
     if (value === 'dark') {
-      setStorageTheme(StorageThemeProps.dark)
+      setStorageTheme(value)
+    } else if (value === 'light') {
+      setStorageTheme(value)
     }
   }, [])
 

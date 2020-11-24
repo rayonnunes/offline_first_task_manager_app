@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeView from '../views/Home'

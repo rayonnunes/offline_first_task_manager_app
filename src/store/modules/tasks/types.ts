@@ -3,8 +3,9 @@ import * as actions from './actions'
 
 export interface TasksResponseProps {
   id: number
-  objective: string
-  status: string
+  title: string
+  description: string
+  status: 'scheduled' | 'started' | 'finished' | 'overdue'
   dueDateTime: string
 }
 

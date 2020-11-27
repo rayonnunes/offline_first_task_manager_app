@@ -5,41 +5,30 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { Database } from '@nozbe/watermelondb'
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite'
-import Routes from './routes'
-import store from './store'
-
-import themeColors from './assets/colors'
-import storeKeys from './config/storageKeys'
+import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider'
 
 import schema from './model/schema'
 import Tasks from './model/Tasks'
 import User from './model/User'
 import CheckIn from './model/CheckIn'
 import CheckOut from './model/CheckOut'
-// import Post from './model/Post' // ⬅️ You'll import your Models here
 
-// First, create the adapter to the underlying database:
 const adapter = new SQLiteAdapter({
+  dbName: 'OfflineTasksDB',
   schema,
-  synchronous: true,
 })
 
 const database = new Database({
   adapter,
-  modelClasses: [
-    Tasks,
-    User,
-    CheckIn,
-    CheckOut,
-    // Post, // ⬅️ You'll add Models to Watermelon here
-  ],
+  modelClasses: [Tasks, User, CheckIn, CheckOut],
   actionsEnabled: true,
 })
-const createTask = async () => {
-  const tasksCollection = database.collections.get('tasks')
-  const allTasks = await tasksCollection.query().fetch()
-  console.log(allTasks[0]._raw)
-}
+
+import Routes from './routes'
+import store from './store'
+
+import themeColors from './assets/colors'
+import storeKeys from './config/storageKeys'
 
 const App = () => {
   const deviceTheme = useColorScheme() || 'light' // light, dark, null
@@ -61,15 +50,13 @@ const App = () => {
     getStorageTheme()
   }, [getStorageTheme])
 
-  useEffect(() => {
-    createTask()
-  }, [])
-
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Routes />
-      </ThemeProvider>
+      <DatabaseProvider database={database}>
+        <ThemeProvider theme={theme}>
+          <Routes />
+        </ThemeProvider>
+      </DatabaseProvider>
     </Provider>
   )
 }

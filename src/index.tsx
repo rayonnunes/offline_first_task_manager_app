@@ -13,6 +13,13 @@ import User from './model/User'
 import CheckIn from './model/CheckIn'
 import CheckOut from './model/CheckOut'
 
+import Routes from './routes'
+import store from './store'
+
+import themeColors from './assets/colors'
+import storeKeys from './config/storageKeys'
+import Reports from './model/Reports'
+
 const adapter = new SQLiteAdapter({
   dbName: 'OfflineTasksDB',
   schema,
@@ -23,13 +30,6 @@ const database = new Database({
   modelClasses: [Tasks, User, Reports, CheckIn, CheckOut],
   actionsEnabled: true,
 })
-
-import Routes from './routes'
-import store from './store'
-
-import themeColors from './assets/colors'
-import storeKeys from './config/storageKeys'
-import Reports from './model/Reports'
 
 const App = () => {
   const deviceTheme = useColorScheme() || 'light' // light, dark, null
@@ -51,29 +51,14 @@ const App = () => {
     getStorageTheme()
   }, [getStorageTheme])
 
-  const createUser = useCallback(async () => {
-    const userCollection = database.collections.get('user')
-    await database.action(async () => {
-      await userCollection.create((user) => {
-        user.isAdmin = true
-        user.name = 'Geralt'
-        user.lastName = 'of Rivia'
-      })
-    })
-  }, [])
-
-  useEffect(() => {
-    // createUser()
-  }, [createUser])
-
   return (
-    <DatabaseProvider database={database}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <DatabaseProvider database={database}>
         <ThemeProvider theme={theme}>
           <Routes />
         </ThemeProvider>
-      </Provider>
-    </DatabaseProvider>
+      </DatabaseProvider>
+    </Provider>
   )
 }
 

@@ -20,7 +20,7 @@ const adapter = new SQLiteAdapter({
 
 const database = new Database({
   adapter,
-  modelClasses: [Tasks, User, CheckIn, CheckOut],
+  modelClasses: [Tasks, User, Reports, CheckIn, CheckOut],
   actionsEnabled: true,
 })
 
@@ -29,6 +29,7 @@ import store from './store'
 
 import themeColors from './assets/colors'
 import storeKeys from './config/storageKeys'
+import Reports from './model/Reports'
 
 const App = () => {
   const deviceTheme = useColorScheme() || 'light' // light, dark, null
@@ -50,14 +51,29 @@ const App = () => {
     getStorageTheme()
   }, [getStorageTheme])
 
+  const createUser = useCallback(async () => {
+    const userCollection = database.collections.get('user')
+    await database.action(async () => {
+      await userCollection.create((user) => {
+        user.isAdmin = true
+        user.name = 'Geralt'
+        user.lastName = 'of Rivia'
+      })
+    })
+  }, [])
+
+  useEffect(() => {
+    // createUser()
+  }, [createUser])
+
   return (
-    <Provider store={store}>
-      <DatabaseProvider database={database}>
+    <DatabaseProvider database={database}>
+      <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Routes />
         </ThemeProvider>
-      </DatabaseProvider>
-    </Provider>
+      </Provider>
+    </DatabaseProvider>
   )
 }
 

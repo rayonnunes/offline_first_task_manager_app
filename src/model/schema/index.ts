@@ -4,17 +4,6 @@ const mySchema = appSchema({
   version: 1,
   tables: [
     tableSchema({
-      name: 'tasks',
-      columns: [
-        { name: 'title', type: 'string' },
-        { name: 'description', type: 'string' },
-        { name: 'status', type: 'string' },
-        { name: 'due_date_time', type: 'number' },
-        { name: 'created_at', type: 'number' },
-        { name: 'updated_at', type: 'number' },
-      ],
-    }),
-    tableSchema({
       name: 'user',
       columns: [
         { name: 'is_admin', type: 'boolean' },
@@ -25,10 +14,23 @@ const mySchema = appSchema({
       ],
     }),
     tableSchema({
+      name: 'tasks',
+      columns: [
+        { name: 'title', type: 'string' },
+        { name: 'description', type: 'string' },
+        { name: 'status', type: 'string' },
+        { name: 'due_date_time', type: 'number' },
+        { name: 'user_id', type: 'string', isIndexed: true },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ],
+    }),
+    tableSchema({
       name: 'checkIn',
       columns: [
         { name: 'status', type: 'string' },
         { name: 'started_at', type: 'number', isOptional: true },
+        { name: 'user_id', type: 'string', isIndexed: true },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },
       ],
@@ -38,6 +40,16 @@ const mySchema = appSchema({
       columns: [
         { name: 'status', type: 'string' },
         { name: 'started_at', type: 'number', isOptional: true },
+        { name: 'user_id', type: 'string', isIndexed: true },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ],
+    }),
+    tableSchema({
+      name: 'reports',
+      columns: [
+        { name: 'content', type: 'string' },
+        { name: 'task_id', type: 'string', isIndexed: true },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },
       ],

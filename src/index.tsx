@@ -13,13 +13,6 @@ import User from './model/User'
 import CheckIn from './model/CheckIn'
 import CheckOut from './model/CheckOut'
 
-import Routes from './routes'
-import store from './store'
-
-import themeColors from './assets/colors'
-import storeKeys from './config/storageKeys'
-import Reports from './model/Reports'
-
 const adapter = new SQLiteAdapter({
   dbName: 'OfflineTasksDB',
   schema,
@@ -31,12 +24,19 @@ const database = new Database({
   actionsEnabled: true,
 })
 
+import Routes from './routes'
+import store from './store'
+
+import themeColors from './assets/colors'
+import storeKeys from './config/storageKeys'
+import Reports from './model/Reports'
+
 const App = () => {
   const deviceTheme = useColorScheme() || 'light' // light, dark, null
   const [storageTheme, setStorageTheme] = useState<'light' | 'dark' | null>(
     null,
   )
-  const theme = themeColors.dark || themeColors[storageTheme || deviceTheme]
+  const theme = themeColors.light || themeColors[storageTheme || deviceTheme]
 
   const getStorageTheme = useCallback(async () => {
     const value = await AsyncStorage.getItem(storeKeys.themeColors)
@@ -51,14 +51,29 @@ const App = () => {
     getStorageTheme()
   }, [getStorageTheme])
 
+  const createUser = useCallback(async () => {
+    const userCollection = database.collections.get('user')
+    await database.action(async () => {
+      await userCollection.create((user) => {
+        user.isAdmin = true
+        user.name = 'Geralt'
+        user.lastName = 'of Rivia'
+      })
+    })
+  }, [])
+
+  useEffect(() => {
+    // createUser()
+  }, [createUser])
+
   return (
-    <Provider store={store}>
-      <DatabaseProvider database={database}>
+    <DatabaseProvider database={database}>
+      <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Routes />
         </ThemeProvider>
-      </DatabaseProvider>
-    </Provider>
+      </Provider>
+    </DatabaseProvider>
   )
 }
 

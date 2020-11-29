@@ -9,25 +9,17 @@ import Button from './Button'
 
 const Profile = { Container, Avatar, Text, DateTime }
 
-const ProfileBar = ({ user, tasks }) => {
+const ProfileBar = ({ user, tasks }) => {  
   return (
-    <>
-      <Profile.Container>
-        <Profile.Avatar source={{ uri: 'https://picsum.photos/200' }} />
-        <Profile.Text>
-          {user.length > 0
-            ? `Hello, ${user[0].name} ${user[0].lastName}`
-            : 'Anonymous'}
-        </Profile.Text>
-        <Profile.DateTime />
-      </Profile.Container>
-      <Button user={user[0]} />
-      {tasks.length > 0 ? (
-        tasks.map((task) => <Text key={task.id}>{task.title}</Text>)
-      ) : (
-        <Text>NO TASKS</Text>
-      )}
-    </>
+    <Profile.Container>
+      <Profile.Avatar source={{ uri: 'https://picsum.photos/200' }} />
+      <Profile.Text>
+        {user.length > 0
+          ? `Hello, ${user[0].name} ${user[0].lastName}`
+          : 'Anonymous'}
+      </Profile.Text>
+      <Profile.DateTime />
+    </Profile.Container>
   )
 }
 const enhace = withObservables(['user', 'tasks'], ({ database }: any) => ({

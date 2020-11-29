@@ -36,7 +36,7 @@ export default class User extends Model {
       task.title = newTask.title
       task.description = newTask.description
       task.status = newTask.status
-      task.due_date_time = newTask.due_date_time
+      task.dueDateTime = newTask.dueDateTime
     })
   }
 }

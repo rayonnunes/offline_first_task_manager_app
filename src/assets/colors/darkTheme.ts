@@ -9,6 +9,7 @@ const colors = {
   disabled: '#b6b6b6',
   shadowColor: '#000',
   textColor: '#fff',
+  blockWallColor: 'rgba(0, 0, 0, 0.85)',
 }
 
 export default colors

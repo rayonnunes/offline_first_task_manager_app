@@ -11,6 +11,8 @@ export default class User extends Model {
   @field('updated_at') updatedAt: any
 
   @children('tasks') tasks: any
+  @children('check_in') checkIn: any
+  @children('check_out') checkOut: any
 
   @action async addUser({
     isAdmin,
@@ -29,14 +31,26 @@ export default class User extends Model {
   }
 
   @action async addTask(newTask) {
-    console.log(newTask)
-
     await this.collections.get('tasks').create((task: any) => {
       task.user.set(this)
       task.title = newTask.title
       task.description = newTask.description
       task.status = newTask.status
       task.dueDateTime = newTask.dueDateTime
+    })
+  }
+
+  @action async createCheckIn() {
+    await this.collections.get('check_in').create((checkIn: any) => {
+      checkIn.user.set(this)
+      checkIn.status = 'created'
+    })
+  }
+
+  @action async createCheckOut() {
+    await this.collections.get('check_out').create((checkOut: any) => {
+      checkOut.user.set(this)
+      checkOut.status = 'created'
     })
   }
 }

@@ -9,5 +9,6 @@ export interface ColorProps {
   disabled: string
   shadowColor: string
   textColor: string
+  inverseTextColor: string
   blockWallColor: string
 }

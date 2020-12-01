@@ -7,7 +7,6 @@ import TaskList from '../../components/TaskList'
 import ActivityButtons from '../../components/ActivityButtons'
 
 const Home = () => {
-  // const { workday } = useSelector((state: StoreState) => state)
   return (
     <HomeContainer>
       <ScrollView>

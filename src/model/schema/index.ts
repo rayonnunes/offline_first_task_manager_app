@@ -26,20 +26,18 @@ const mySchema = appSchema({
       ],
     }),
     tableSchema({
-      name: 'checkIn',
+      name: 'check_in',
       columns: [
         { name: 'status', type: 'string' },
-        { name: 'started_at', type: 'number', isOptional: true },
         { name: 'user_id', type: 'string', isIndexed: true },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },
       ],
     }),
     tableSchema({
-      name: 'checkOut',
+      name: 'check_out',
       columns: [
         { name: 'status', type: 'string' },
-        { name: 'started_at', type: 'number', isOptional: true },
         { name: 'user_id', type: 'string', isIndexed: true },
         { name: 'created_at', type: 'number' },
         { name: 'updated_at', type: 'number' },

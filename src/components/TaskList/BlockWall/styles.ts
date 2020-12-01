@@ -7,12 +7,11 @@ interface BlockWallProps {
 }
 
 export const Layer = styled.View`
-  display: ${(props: BlockWallProps) => (props.show ? 'flex' : 'none')};
   position: absolute;
   align-items: center;
   justify-content: flex-start;
-  height: 110%;
-  width: 105%;
+  height: 200%;
+  width: 106%;
   background-color: ${({ theme }: { theme: ColorProps }) =>
     theme.blockWallColor};
 `

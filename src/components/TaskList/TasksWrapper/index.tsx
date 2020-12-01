@@ -3,9 +3,10 @@ import TaskItem from './TaskItem'
 import { withDatabase } from '@nozbe/watermelondb/DatabaseProvider'
 import withObservables from '@nozbe/with-observables'
 import { Q } from '@nozbe/watermelondb'
+import numberDateTime from '../../../utils/numberDateTime'
+import { TasksResponseProps } from '../../../store/modules/tasks/types'
 import Header from './Header'
 import TaskEmpty from './TaskEmpty'
-import { TasksResponseProps } from '../../../store/modules/tasks/types'
 
 const TasksWrapper = ({
   tasks,
@@ -14,8 +15,6 @@ const TasksWrapper = ({
   tasks: TasksResponseProps[]
   title: string
 }) => {
-  console.log(tasks)
-
   return (
     <>
       <Header>{title}</Header>
@@ -35,22 +34,11 @@ const TasksWrapper = ({
 }
 
 const enhance = withObservables(['tasks'], ({ database }: any) => {
-  const today: [number, number, number] = [
-    new Date().getFullYear(),
-    new Date().getMonth(),
-    new Date().getDate(),
-  ]
-  const todayTime = new Date(...today).getTime()
-  const tomorrow: [number, number, number] = [
-    new Date().getFullYear(),
-    new Date().getMonth(),
-    new Date().getDate() + 1,
-  ]
-  const tomorrowTime = new Date(...tomorrow).getTime()
+  const { today, tomorrow } = numberDateTime
   return {
     tasks: database.collections
       .get('tasks')
-      .query(Q.where('due_date_time', Q.between(todayTime, tomorrowTime))),
+      .query(Q.where('due_date_time', Q.between(today, tomorrow))),
   }
 })
 

@@ -36,7 +36,7 @@ const App = () => {
   const [storageTheme, setStorageTheme] = useState<'light' | 'dark' | null>(
     null,
   )
-  const theme = themeColors.light || themeColors[storageTheme || deviceTheme]
+  const theme = themeColors.dark || themeColors[storageTheme || deviceTheme]
 
   const getStorageTheme = useCallback(async () => {
     const value = await AsyncStorage.getItem(storeKeys.themeColors)

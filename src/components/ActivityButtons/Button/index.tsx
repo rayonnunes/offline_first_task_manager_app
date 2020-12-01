@@ -1,16 +1,19 @@
 import React from 'react'
 import { GestureResponderEvent } from 'react-native'
-import { ActivityButton, ActivityText } from './styles'
+import { ActivityButton, ActivityText, Icon } from './styles'
 const Button = ({
+  disabled,
   title,
   onPress,
 }: {
+  disabled: boolean
   title: string
-  onPress: (event: GestureResponderEvent) => void
+  onPress: boolean | ((event: GestureResponderEvent) => void)
 }) => {
   return (
-    <ActivityButton onPress={onPress}>
-      <ActivityText>{title}</ActivityText>
+    <ActivityButton disabled={disabled} onPress={onPress}>
+      <Icon name="flag" size={16} />
+      <ActivityText>{title.toUpperCase()}</ActivityText>
     </ActivityButton>
   )
 }

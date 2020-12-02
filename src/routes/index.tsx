@@ -3,6 +3,7 @@ import { ThemeContext } from 'styled-components'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeView from '../views/Home'
+import TaskView from '../views/Task'
 
 const Routes = () => {
   const themeContext = useContext(ThemeContext)
@@ -20,6 +21,7 @@ const Routes = () => {
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeView} />
+        <Stack.Screen name="Task" component={TaskView} />
       </Stack.Navigator>
     </NavigationContainer>
   )

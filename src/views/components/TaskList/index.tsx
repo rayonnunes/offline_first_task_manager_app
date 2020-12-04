@@ -10,7 +10,7 @@ import BlockWall from './BlockWall'
 
 const Task = { Container, Header, TasksWrapper, BlockWall }
 
-const TaskList = ({ checkIn, checkOut }) => {
+const TaskList = ({ checkIn, checkOut }: any) => {
   const [showBlockWall, setShowBlockWall] = useState(true)
   const [warnMessage, setWarnMessage] = useState('')
   useEffect(() => {

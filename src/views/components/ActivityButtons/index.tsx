@@ -20,9 +20,6 @@ const ActivityButtons = ({ user, checkIn, checkOut }) => {
   }, [user])
 
   useEffect(() => {
-    console.log('checkIn', checkIn)
-    console.log('checkOut', checkOut)
-
     if (checkIn.length > 0) {
       setDisabled([true, false])
     } else {

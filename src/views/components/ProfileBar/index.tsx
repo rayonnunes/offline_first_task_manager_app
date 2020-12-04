@@ -11,17 +11,21 @@ const Profile = { Container, Avatar, Text, DateTime }
 
 const ProfileBar = ({ user }) => {
   return (
-    <Profile.Container>
-      <Profile.Avatar source={{ uri: 'https://picsum.photos/200' }} />
-      <Profile.Text>
-        {user.length > 0
-          ? `Hello, ${user[0].name} ${user[0].lastName}`
-          : 'Anonymous'}
-      </Profile.Text>
-      <Profile.DateTime />
-    </Profile.Container>
+    <>
+      <Profile.Container>
+        <Profile.Avatar source={{ uri: 'https://picsum.photos/200' }} />
+        <Profile.Text>
+          {user.length > 0
+            ? `Hello, ${user[0].name} ${user[0].lastName}`
+            : 'Anonymous'}
+        </Profile.Text>
+        <Profile.DateTime />
+      </Profile.Container>
+      {/* <Button user={user[0]} /> */}
+    </>
   )
 }
+
 const enhace = withObservables(['user', 'tasks'], ({ database }: any) => ({
   user: database.collections.get('user').query(),
 }))

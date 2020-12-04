@@ -1,6 +1,5 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
-
 import { HomeContainer } from './styles'
 import ProfileBar from '../components/ProfileBar'
 import TaskList from '../components/TaskList'
@@ -17,5 +16,4 @@ const Home = () => {
     </HomeContainer>
   )
 }
-
 export default Home

@@ -21,8 +21,8 @@ const TasksWrapper = ({
       {tasks.length > 0 ? (
         tasks.map((task, index) => (
           <TaskItem
+            tasks={task}
             key={task.id}
-            task={task}
             last={index === tasks.length - 1}
           />
         ))

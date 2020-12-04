@@ -19,9 +19,15 @@ const Routes = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeView} />
-        <Stack.Screen name="Task" component={TaskView} />
+        <Stack.Screen
+          name="Task"
+          component={TaskView}
+          options={({ route }: { route: any }) => ({
+            title: route.params.task.title,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

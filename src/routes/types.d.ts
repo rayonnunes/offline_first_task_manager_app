@@ -1,11 +1,15 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+
+interface StackParamList {
+  task: {
+    title: string
+    id: string
+  }
+}
 
 type RootStackParamList = {
   Home: undefined
-  Task: undefined
+  Task: StackParamList
 }
 
-export type TaskScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Task'
->
+export type TaskScreenNavigationProp = RouteProp<RootStackParamList, 'Task'>

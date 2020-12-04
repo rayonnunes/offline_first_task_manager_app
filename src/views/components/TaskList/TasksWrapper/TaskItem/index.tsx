@@ -1,6 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 import format from 'date-fns/format'
+import withObservables from '@nozbe/with-observables'
+import { useNavigation } from '@react-navigation/native'
 
 import { TasksResponseProps } from '../../../../../store/modules/tasks/types'
 import { TaskScreenNavigationProp } from '../../../../../routes/types'
@@ -17,33 +19,49 @@ import {
 } from './styles'
 
 const TaskItem = ({
-  task,
+  tasks,
   last,
-  navigation,
 }: {
-  task: TasksResponseProps
-  last: boolean
   navigation?: TaskScreenNavigationProp
-}) => (
-  <ItemContainer last={last} onPress={() => navigation?.navigate('Task')}>
-    <ItemRow>
-      <StatusIcon status={task.status} />
-      <View>
-        <TitleRow>
-          <ItemTitle>{task.title}</ItemTitle>
-        </TitleRow>
-        <ItemStatus>({task.status})</ItemStatus>
-        {task.description.length > 180 ? (
-          <ItemDescription>
-            {task.description.substring(0, 176)}...
-          </ItemDescription>
-        ) : (
-          <ItemDescription>{task.description}</ItemDescription>
-        )}
-      </View>
-      <ItemDateTime>{format(new Date(task.dueDateTime), 'HH:mm')}</ItemDateTime>
-    </ItemRow>
-  </ItemContainer>
-)
+  tasks: TasksResponseProps
+  last: boolean
+}) => {
+  const navigation = useNavigation()
+  return (
+    <ItemContainer
+      last={last}
+      onPress={() =>
+        navigation.navigate('Task', {
+          task: { id: tasks.id, title: tasks.title },
+        })
+      }>
+      <ItemRow>
+        <StatusIcon status={tasks.status} />
+        <View>
+          <TitleRow>
+            <ItemTitle>{tasks.title}</ItemTitle>
+          </TitleRow>
+          <ItemStatus>({tasks.status})</ItemStatus>
+          {tasks.description.length > 180 ? (
+            <ItemDescription>
+              {tasks.description.substring(0, 175)}...
+            </ItemDescription>
+          ) : (
+            <ItemDescription>{tasks.description}</ItemDescription>
+          )}
+        </View>
+        <ItemDateTime>
+          {format(new Date(tasks.dueDateTime), 'HH:mm')}
+        </ItemDateTime>
+      </ItemRow>
+    </ItemContainer>
+  )
+}
 
-export default TaskItem
+const enhance = withObservables(['tasks'], ({ tasks }) => {
+  return {
+    tasks,
+  }
+})
+
+export default enhance(TaskItem)

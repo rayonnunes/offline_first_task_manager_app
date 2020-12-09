@@ -17,10 +17,7 @@ export const ActivityButton = styled.TouchableOpacity`
     theme: ColorProps
   }) => (disabled ? theme.disabled : theme.primary)};
   shadow-color: ${({ theme }: { theme: ColorProps }) => theme.shadowColor};
-  shadow-offset: {
-    width: 0px;
-    height: 2px;
-  }
+  shadow-offset: 0 2px;
   shadow-opacity: 0.25;
   shadow-radius: 3.84px;
   elevation: 5;

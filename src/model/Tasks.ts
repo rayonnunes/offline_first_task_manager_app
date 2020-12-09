@@ -5,6 +5,7 @@ import {
   field,
   relation,
 } from '@nozbe/watermelondb/decorators'
+import { TasksResponseProps } from '../store/modules/tasks/types'
 
 export default class Tasks extends Model {
   static table = 'tasks'
@@ -22,6 +23,12 @@ export default class Tasks extends Model {
   @field('updated_at') updatedAt: any
   @relation('user', 'user_id') user: any
   @children('reports') reports: any
+
+  @action async updateStatus(newStatus: TasksResponseProps['status']) {
+    return this.update((task) => {
+      task.status = newStatus
+    })
+  }
 
   @action async addReport(newReport: any) {
     return this.collections.get('reports').create((report: any) => {

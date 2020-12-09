@@ -14,6 +14,7 @@ const StatusIcon = ({ status }: { status: TasksResponseProps['status'] }) => {
     started: renderIcon('clock', 'warning'),
     finished: renderIcon('check-circle', 'success'),
     overdue: renderIcon('alert-circle', 'danger'),
+    unaccomplished: renderIcon('alert-circle', 'danger'),
   }
 
   return acceptedStatus[status]

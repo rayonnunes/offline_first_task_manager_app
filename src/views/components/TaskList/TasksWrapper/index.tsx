@@ -38,7 +38,8 @@ const enhance = withObservables(['tasks'], ({ database }: any) => {
   return {
     tasks: database.collections
       .get('tasks')
-      .query(Q.where('due_date_time', Q.between(today, tomorrow))),
+      .query(Q.where('due_date_time', Q.between(today, tomorrow)))
+      .observe(),
   }
 })
 

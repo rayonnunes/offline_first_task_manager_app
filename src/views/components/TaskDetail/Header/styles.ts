@@ -3,16 +3,19 @@ import { ColorProps } from '../../../../assets/colors/types'
 
 export const HeaderWrapper = styled.View`
   justify-content: center;
-  padding: 16px 6px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
   border-bottom-width: 1px;
   border-bottom-color: ${({ theme }: { theme: ColorProps }) => theme.disabled};
 `
 
 export const HeaderRow = styled.View`
   flex-direction: row;
+  align-items: center;
 `
 
 export const HeaderText = styled.Text`
+  max-width: 90%;
   font-family: Montserrat-Bold;
   font-size: 19px;
 `

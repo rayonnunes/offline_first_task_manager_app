@@ -5,7 +5,7 @@ export interface TasksResponseProps {
   id: number
   title: string
   description: string
-  status: 'scheduled' | 'started' | 'finished' | 'overdue'
+  status: 'scheduled' | 'started' | 'finished' | 'overdue' | 'unaccomplished'
   dueDateTime: string
 }
 

@@ -6,10 +6,10 @@ import withObservables from '@nozbe/with-observables'
 const Button = ({ user }: any) => {
   const createTask = useCallback(async () => {
     const newTask = {
-      title: "A Bard's Beloved",
+      title: 'Gwent: Old Pals',
       description:
-        'Geralt happened across a terrified bard who trembled when he spoke of his "beloved", yet other than that refused to say an ill word about the woman. Even stranger, everything seemed to indicate his betrothed lived in a cave. Geralt decided to check out what sort of curious couple he was dealing with. It turned out the bard\'s "beloved" was a hideous water hag. No wonder the thought of her caress made him shake in fear and revulsion. Geralt dealt with her as he usually deals with monsters.',
-      status: 'finished',
+        'Gwent is played for pleasure, a pleasure that is highest when playing in good company - and the best company of all is that of old and true friends. Geralt thus sought out some of his long-time companions for a hand or two of gwent - and the chance to win powerful cards from each of them. Geralt had a wonderful time slapping down cards with familiar faces and added several powerful new cards to his collection while he was at it.',
+      status: 'started',
       dueDateTime: new Date().getTime(),
     }
     await user.addTask(newTask)

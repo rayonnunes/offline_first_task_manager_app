@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 import { ColorProps } from '../../../../assets/colors/types'
 
 export const Card = styled.View`
-  padding: 16px 9px;
+  padding: 22px 14px;
   margin: 6px;
   background-color: ${({ theme }: { theme: ColorProps }) =>
     theme.backgroundContainer};

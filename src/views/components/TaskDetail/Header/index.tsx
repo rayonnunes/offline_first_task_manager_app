@@ -1,12 +1,13 @@
 import React from 'react'
 import StatusIcon from '../../StatusIcon'
+import { TasksResponseProps } from '../../../../store/modules/tasks/types'
 import { HeaderWrapper, HeaderRow, HeaderText, HeaderStatus } from './styles'
 
 const Header = ({
   status,
   title,
 }: {
-  status: 'scheduled' | 'started' | 'finished' | 'overdue'
+  status: TasksResponseProps['status']
   title: string
 }) => {
   return (

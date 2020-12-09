@@ -8,7 +8,10 @@ const Body = ({
   dueDateTime: string
 }) => {
   return (
-    <></>
+    <>
+      <Text>{dueDateTime}</Text>
+      <Text>{description}</Text>
+    </>
   )
 }
 

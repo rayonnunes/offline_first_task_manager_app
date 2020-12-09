@@ -1,7 +1,12 @@
 import React from 'react'
-
-const Body = () => {
-
+import { Text } from 'react-native'
+const Body = ({
+  description,
+  dueDateTime,
+}: {
+  description: string
+  dueDateTime: string
+}) => {
   return (
     <></>
   )

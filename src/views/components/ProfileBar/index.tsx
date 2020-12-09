@@ -9,7 +9,7 @@ import Button from './Button'
 
 const Profile = { Container, Avatar, Text, DateTime }
 
-const ProfileBar = ({ user }) => {
+const ProfileBar = ({ user }: any) => {
   return (
     <>
       <Profile.Container>
@@ -21,12 +21,12 @@ const ProfileBar = ({ user }) => {
         </Profile.Text>
         <Profile.DateTime />
       </Profile.Container>
-      {/* <Button user={user[0]} /> */}
+      <Button user={user[0]} />
     </>
   )
 }
 
-const enhace = withObservables(['user', 'tasks'], ({ database }: any) => ({
+const enhace = withObservables(['user'], ({ database }: any) => ({
   user: database.collections.get('user').query(),
 }))
 

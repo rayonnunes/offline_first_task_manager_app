@@ -1,17 +1,27 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import withObservables from '@nozbe/with-observables'
+import { withDatabase } from '@nozbe/watermelondb/DatabaseProvider'
 import { TaskScreenNavigationProp } from '../../routes/types'
 
-const Task = ({ route }: { route: TaskScreenNavigationProp }) => {
+import TaskDetail from '../components/TaskDetail'
+
+const Task = ({
+  route,
+  tasks,
+}: {
+  route: TaskScreenNavigationProp
+  tasks: any
+}) => {
   const { task } = route.params
-  const { title, id } = task
-  console.log('taskTitle', title)
-  console.log('taskId', id)
   return (
-    <View>
-      <Text>Hello From task</Text>
-    </View>
+    <TaskDetail tasks={tasks}/>
   )
 }
 
-export default Task
+const enhance = withObservables(['tasks'], ({ database, route }: any) => {
+  const taskId = route.params.task.id
+  return {
+    tasks: database.collections.get('tasks').find(taskId),
+  }
+})
+export default withDatabase(enhance(Task))
